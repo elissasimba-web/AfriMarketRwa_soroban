@@ -1,0 +1,9 @@
+[package]
+name = "livestock"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+soroban-sdk = "23.4.0"
+escrow = { path = "../../escrow/escrow" }
+core = { path = "../core" }
