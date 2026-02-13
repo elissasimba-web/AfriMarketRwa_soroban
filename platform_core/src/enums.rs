@@ -1,19 +1,18 @@
+use soroban_sdk::contracttype;
 
-
-#[derive(Clone)]
-pub enum ItemStatus {
-    Active,
-    SoldOut,
+#[contracttype]
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub enum ProductStatus {
+    Available,
+    Reserved,
+    Sold,
+    Unavailable,
 }
-#[derive(Clone)]
+
+#[contracttype]
+#[derive(Clone, Copy, PartialEq, Eq)]
 pub enum OrderStatus {
     Pending,
     Completed,
     Cancelled,
-}
-#[derive(Clone)]
-pub enum AgricultureCategory {
-    Crops,
-    Livestock,
-    Tools,
 }

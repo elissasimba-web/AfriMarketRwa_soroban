@@ -1,22 +1,42 @@
-# Soroban Project
+# AfriMarketRwa Soroban Platform
 
-## Project Structure
+AfriMarketRwa ni platform y'ubucuruzi n'ubukode yubatswe kuri Soroban, igizwe n'ibice byinshi (vertical modules) bikoresha **shared core** na **escrow**.
 
-This repository uses the recommended structure for a Soroban project:
+## Uko project yubatswe
 
-```text
-.
-├── contracts
-│   └── hello_world
-│       ├── src
-│       │   ├── lib.rs
-│       │   └── test.rs
-│       └── Cargo.toml
-├── Cargo.toml
-└── README.md
+- `platform_core/`:
+  - Ubwoko (types/enums) busangiwe n'andi ma-contract.
+- `escrow/escrow/`:
+  - Contract ishinzwe kubika no gusaranganya ubwishyu (`deposit`, `settle_rl`).
+- `agriculture/`:
+  - Kugurisha umusaruro (items/orders).
+- `contracts/rental/`:
+  - Ubukode n'igurishwa ry'umutungo.
+- `livestock/`:
+  - Isoko ry'amatungo, rihuzwa na escrow.
+- `health/`:
+  - Listing ya services z'ubuzima.
+- `transport/`:
+  - Listing no kubika (reserve) ride offers.
+- `tourism/`:
+  - Listing no booking ya tourism packages.
+
+## Icyerekezo cya backend/frontend
+
+### Backend (Soroban contracts)
+1. Gukomeza kongeramo tests zambukiranya contracts (escrow + sector modules).
+2. Standardization y'events no status transitions ku modules zose.
+3. Access-control irushijeho gukomera (admin/provider roles).
+
+### Frontend
+1. Kubaka dashboard imwe ifite sections: Agriculture, Rental, Livestock, Health, Transport, Tourism.
+2. Gushyiraho API/service layer ihuza contract clients.
+3. Gushyiramo flow y'ubwishyu n'igenzura rya transactions (escrow).
+
+## Gutangira
+
+```bash
+cargo test --workspace
 ```
 
-- New Soroban contracts can be put in `contracts`, each in their own directory. There is already a `hello_world` contract in there to get you started.
-- If you initialized this project with any other example contracts via `--with-example`, those contracts will be in the `contracts` directory as well.
-- Contracts should have their own `Cargo.toml` files that rely on the top-level `Cargo.toml` workspace for their dependencies.
-- Frontend libraries can be added to the top-level directory as well. If you initialized this project with a frontend template via `--frontend-template` you will have those files already included.
+> Niba environment ifite network restrictions, crates download ishobora kubanza kugorana.

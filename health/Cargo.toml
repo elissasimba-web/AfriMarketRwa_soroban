@@ -1,5 +1,5 @@
 [package]
-name = "livestock"
+name = "health"
 version = "0.1.0"
 edition = "2021"
 
@@ -9,4 +9,3 @@ crate-type = ["cdylib"]
 [dependencies]
 soroban-sdk = { workspace = true }
 platform_core = { path = "../platform_core" }
-escrow = { path = "../escrow/escrow" }
