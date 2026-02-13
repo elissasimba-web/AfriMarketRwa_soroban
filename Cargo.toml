@@ -1,6 +1,16 @@
 [workspace]
 resolver = "2"
-members = 
+members = [
+    "platform_core",
+    "escrow/escrow",
+    "agriculture",
+    "contracts/rental",
+    "livestock",
+    "health",
+    "transport",
+    "tourism",
+]
+
 
 
 [workspace.dependencies]

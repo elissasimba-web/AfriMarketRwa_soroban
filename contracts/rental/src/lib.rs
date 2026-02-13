@@ -128,6 +128,12 @@ impl RentalContract {
         env.storage().instance().set(&ITEMS_KEY, &items);
     }
 
+
+    pub fn get_item(env: Env, id: u32) -> RentalItem {
+        let items: Map<u32, RentalItem> = env.storage().instance().get(&ITEMS_KEY).unwrap();
+        items.get(id).expect("Item not found")
+    }
+
     // ============== RETURN ITEM =================
     pub fn return_item(env: Env, id: u32) -> (i128, i128) {
         let mut items: Map<u32, RentalItem> =
@@ -141,7 +147,7 @@ impl RentalContract {
         let escrow: Address = env.storage().instance().get(&ESCROW_CONTRACT_KEY).unwrap();
         let xlm_token: Address = env.storage().instance().get(&XLM_TOKEN_KEY).unwrap();
 
-        let renter = item.renter.clone().unwrap();
+        let renter = item.renter.clone().expect("Item not currently rented");
         let owner = item.owner.clone();
 
         // ---- call escrow.settle(xlm, renter, owner, refund, penalty)
@@ -250,3 +256,6 @@ impl RentalContract {
         env.storage().instance().set(&ITEMS_KEY, &items);
     }
 }
+
+#[cfg(test)]
+mod test;
