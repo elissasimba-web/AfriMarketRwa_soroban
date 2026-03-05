@@ -136,7 +136,7 @@ Token Standard: USDC (cross-module payments)
 Clone the repository
 Copy code
 Bash
-git clone https://github.com/<your-username>/AfriMarketRwa_soroban.git
+git clone https://github.com/<elissasimba-web>/AfriMarketRwa_soroban.git
 cd AfriMarketRwa_soroban
 Build contracts
 Copy code
