@@ -547,3 +547,17 @@ AfriMarketRwa is designed to evolve into an open decentralized infrastructure fo
             Transport
             Health
             Agriculture
+
+
+            AfriMarketRwa Platform
+                   │
+            ┌──────▼──────┐
+            │ platform_core│
+            └──────┬──────┘
+                   │
+     ┌─────────────┼─────────────┐
+     ▼             ▼             ▼
+ Rental        Transport      Agriculture
+ Module         Module         Module
+     │             │             │
+     └───────Escrow Smart Contract───────
