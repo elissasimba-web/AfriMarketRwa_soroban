@@ -1,7 +1,10 @@
+# Soroban Project
 
 ## Project Structure
 
-This repository uses the recommended structure for a Soroban project:text
+This repository uses the recommended structure for a Soroban project:
+
+```text
 .
 ├── contracts
 │   └── hello_world
@@ -11,178 +14,536 @@ This repository uses the recommended structure for a Soroban project:text
 │       └── Cargo.toml
 ├── Cargo.toml
 └── README.md
+```
 
 - New Soroban contracts can be put in `contracts`, each in their own directory. There is already a `hello_world` contract in there to get you started.
 - If you initialized this project with any other example contracts via `--with-example`, those contracts will be in the `contracts` directory as well.
 - Contracts should have their own `Cargo.toml` files that rely on the top-level `Cargo.toml` workspace for their dependencies.
 - Frontend libraries can be added to the top-level directory as well. If you initialized this project with a frontend template via `--frontend-template` you will have those files already included.
-# 🏠 AfriMarketRwa – Rental & Property Sale Smart Contract
+AfriMarketRwa – Decentralized Marketplace Infrastructure for Africa
 
-This project is a **Soroban smart contract** built on the **Stellar blockchain** that enables:
+AfriMarketRwa is a decentralized multi-sector marketplace infrastructure powered by Stellar blockchain and Soroban smart contracts.
 
-- 🏠 Renting properties with refundable deposits  
-- 🛒 Selling properties securely  
-- 🔐 Escrow-based payments using XLM  
-- ⛔ Protection against selling rented items  
+The platform aims to solve trust, payment security, and service fragmentation problems across Africa by connecting multiple sectors into a single decentralized ecosystem.
 
 ---
 
-## 🚀 Features
+🌍 The Problem
 
-### 🔹 Rental
-- Property owners can list items for rent
-- Renters pay a **deposit** via escrow
-- Deposit is refunded upon return
-- Penalties can be applied if needed (extendable)
+Across Africa, many essential services operate in isolated systems with limited trust and transparency.
 
-### 🔹 Sale
-- Owners can list properties for sale
-- Buyers pay via escrow
-- Ownership transfers after successful payment
-- A property **cannot be sold while rented**
+Major challenges include:
 
----
+1. Lack of Trust in Transactions
 
-## 🧠 Contract Design
+Renting property, buying goods, or booking services often requires manual agreements or middlemen, leading to fraud and disputes.
 
-### Storage
-- `ITEMS` → Stores all rental & sale items
-- `ESCROW` → Escrow contract address
-- `XLM` → XLM token address
+2. Fragmented Service Platforms
 
-### Main Functions
-| Function | Description |
-|--------|-------------|
-| `init` | Initialize escrow & token addresses |
-| `add_item` | Add a rental item |
-| `rent_item` | Rent an item with deposit |
-| `return_item` | Return rented item and settle escrow |
-| `add_property_for_sale` | List property for sale |
-| `buy_property` | Buy property via escrow |
+Travel booking, transport tickets, agriculture markets, and healthcare services operate on separate platforms, forcing users to switch between systems.
+
+3. Unsafe Payments
+
+Users often pay before receiving services, creating risk of scams and financial loss.
+
+4. Limited Access to Markets
+
+Farmers and small businesses struggle to access secure digital marketplaces.
 
 ---
 
-## 🛠️ Tech Stack
+💡 The Solution
 
-- **Rust**
-- **Soroban SDK v23.4.0**
-- **Stellar Blockchain**
-- Escrow-based payment model
+AfriMarketRwa introduces a decentralized marketplace infrastructure where services interact through smart contract escrow payments.
 
----
+Instead of relying on centralized intermediaries, transactions are secured by Soroban smart contracts on Stellar.
 
-## 🧪 Testing
+Key benefits:
 
-Run contract tests with:
-
-```bash
-cargo test
-# AfriMarketRwa – African Decentralized Ecosystem
-
-AfriMarketRwa is a **multi-sector decentralized platform** powered by **Stellar blockchain and Soroban smart contracts**, designed to unify critical African services into a **single interoperable ecosystem**.  
-
-This platform enables **secure, transparent, and scalable transactions** for multiple sectors including **Rental, Tourism, Transport, Health, and Agriculture**.  
+• Secure escrow payments
+• Transparent transactions
+• Reduced fraud
+• Interoperable service modules
 
 ---
 
-## 🚀 Features
+🚀 Platform Modules
 
-### 1. Rental & Property Management
-- List properties for **rent or sale**.  
-- **Escrow-based deposits** secure transactions.  
-- Automatic **refunds and settlements** via smart contracts.  
+AfriMarketRwa integrates multiple African service sectors into a single interoperable ecosystem.
 
-### 2. Tourism & Transport
-- Book **tours, accommodations, and attractions**.  
-- Seamless integration with **multi-modal transport options** (flights, buses, ferries, walking tours).  
-- Users can **bundle tourism and transport** services into single packages.  
+🏠 Rental & Property
 
-### 3. Healthcare
-- Schedule **appointments and consultations** across multiple providers.  
-- Secure **payment and fund transfers**.  
-- Maintain **transparency and traceability** for all transactions.  
+Users can:
 
-### 4. Agriculture
-- Access **tools, seeds, equipment, and fresh produce**.  
-- Connect **farmers, vendors, and consumers** in real-time.  
-- Support **logistics and marketplace interactions**.  
+- List properties for rent
+- Pay deposits securely through escrow
+- Receive automatic settlement after rental completion
+
+Smart contracts ensure:
+
+- Funds are locked securely
+- Disputes can be resolved
+- Deposits are protected
 
 ---
 
-## 🏗️ Architecture
+✈️ Tourism
 
-```text
-AfriMarketRwa (Core Platform)
+Users can:
+
+- Book tours and attractions
+- Reserve accommodations
+- Combine tourism services with transport
+
+Tourism bookings can interact with transport services seamlessly.
+
+---
+
+🚆 Transport
+
+Transport services include:
+
+- Flights
+- Bus tickets
+- Ferry travel
+- Tour transport
+
+Users can book transport directly from tourism services or independently.
+
+---
+
+🏥 Health
+
+The platform allows:
+
+- Medical appointment scheduling
+- Consultation payments
+- Cross-border healthcare support
+
+Payments and records remain transparent and secure.
+
+---
+
+🌾 Agriculture
+
+Agriculture module enables:
+
+- Farmers to sell produce
+- Access farming tools and equipment
+- Purchase seeds and agricultural supplies
+
+This creates a direct marketplace between farmers and buyers.
+
+---
+
+🔐 Escrow Payment System
+
+The platform uses smart contract escrow payments.
+
+Transaction flow:
+
+1. Buyer initiates payment
+2. Funds are locked in escrow
+3. Service is delivered
+4. Escrow releases payment to provider
+
+If disputes occur:
+
+- Escrow funds remain locked
+- Settlement rules determine final distribution
+
+This system removes the need for trusted intermediaries.
+
+---
+
+🏗 Platform Architecture
+
+AfriMarketRwa Core Platform
 │
-├─ Rental Module ─── Escrow Smart Contracts ─── USDC Payments
+├── Escrow Smart Contracts
 │
-├─ Tourism Module ─── Booking & Transport Integration
+├── Rental Module
 │
-├─ Transport Module ─── Multi-modal Scheduling & Ticketing
+├── Tourism Module
 │
-├─ Health Module ─── Appointment & Payment Management
+├── Transport Module
 │
-└─ Agriculture Module ─── Marketplace & Logistics
-Highlights:
-Each module is independent yet interoperable via core smart contracts.
-Escrow layer ensures trustless and secure payments.
-USDC on Stellar is the primary currency for cross-module transactions.
-🛠️ Tech Stack
+├── Health Module
+│
+└── Agriculture Module
+
+Each module interacts with the core escrow layer for secure payments.
+
+---
+
+⚙ Technology Stack
+
 Blockchain: Stellar
-Smart Contract Framework: Soroban SDK
+Smart Contracts: Soroban
 Programming Language: Rust
-Token Standard: USDC (cross-module payments)
-🧪 Setup Instructions
-Clone the repository
-Copy code
-Bash
-git clone https://github.com/<elissasimba-web>/AfriMarketRwa_soroban.git
+Payment Asset: USDC on Stellar
+Architecture: Modular smart contract system
+
+---
+
+🧪 Development Setup
+
+Clone the repository:
+
+git clone https://github.com/elissasimba-web/AfriMarketRwa_soroban.git
 cd AfriMarketRwa_soroban
-Build contracts
-Copy code
-Bash
+
+Build contracts:
+
 cargo build --all
-Run tests
-Copy code
-Bash
+
+Run tests:
+
 cargo test
-Deploy a contract
-Use Soroban CLI or Stellar network testnet for deployment.
-🤝 Contribution Guide
-Fork the repository
-Create a feature branch:
-Copy code
-Bash
-git checkout -b feature/<your-feature>
-Implement your feature or module
-Test thoroughly with cargo test
-Commit changes with descriptive messages
-Submit a Pull Request to the main branch
-📄 Whitepaper Outline
-Introduction
-African digital ecosystem challenges
-Why decentralization and Stellar
-Vision & Mission
-Multi-sector interoperability
-Secure, transparent, and scalable platform
-Architecture
-Core platform & module structure
-Escrow & payment workflow
-Modules
-Rental, Tourism, Transport, Health, Agriculture
-Features, flow, and smart contract interactions
-Token & Payment Model
-USDC on Stellar
-Escrow-based payments
-Roadmap
-Current status
-Near-term development
-Long-term vision
-Security & Governance
-DAO / foundation structure
-User trust and dispute resolution
-🔑 Key Takeaways
-AfriMarketRwa is more than a marketplace, it’s a modular African ecosystem.
-Interoperable modules allow seamless expansion.
-Escrow & smart contracts guarantee trustless transactions.
-Platform is bootcamp-ready, investor-ready, and scalable for real-world adoption.
+
+---
+
+📊 Project Vision
+
+AfriMarketRwa aims to become core infrastructure for African digital services by enabling secure transactions across industries.
+
+The platform focuses on:
+
+- Trustless commerce
+- Cross-sector interoperability
+- Blockchain-powered financial security
+
+---
+
+🛣 Roadmap
+
+Phase 1
+
+Core escrow smart contract development
+
+Phase 2
+
+Rental marketplace integration
+
+Phase 3
+
+Tourism and transport services
+
+Phase 4
+
+Agriculture and health ecosystems
+
+Phase 5
+
+Decentralized governance and scaling
+
+---
+
+🤝 Contribution
+
+Contributions are welcome.
+
+Steps:
+
+1. Fork the repository
+2. Create a feature branch
+3. Implement improvements
+4. Submit a pull request
+
+---
+
+🌍 Long Term Vision
+
+AfriMarketRwa is designed to evolve into an open decentralized infrastructure for African marketplaces, enabling millions of users to transact securely without centralized intermediaries.
+
+---      
+
+
+AfriMarketRwa – Decentralized Marketplace Infrastructure for Africa
+
+AfriMarketRwa is a decentralized multi-sector marketplace infrastructure powered by Stellar blockchain and Soroban smart contracts.
+
+The platform aims to solve trust, payment security, and service fragmentation problems across Africa by connecting multiple sectors into a single decentralized ecosystem.
+
+---
+
+🌍 The Problem
+
+Across Africa, many essential services operate in isolated systems with limited trust and transparency.
+
+Major challenges include:
+
+1. Lack of Trust in Transactions
+
+Renting property, buying goods, or booking services often requires manual agreements or middlemen, leading to fraud and disputes.
+
+2. Fragmented Service Platforms
+
+Travel booking, transport tickets, agriculture markets, and healthcare services operate on separate platforms, forcing users to switch between systems.
+
+3. Unsafe Payments
+
+Users often pay before receiving services, creating risk of scams and financial loss.
+
+4. Limited Access to Markets
+
+Farmers and small businesses struggle to access secure digital marketplaces.
+
+---
+
+💡 The Solution
+
+AfriMarketRwa introduces a decentralized marketplace infrastructure where services interact through smart contract escrow payments.
+
+Instead of relying on centralized intermediaries, transactions are secured by Soroban smart contracts on Stellar.
+
+Key benefits:
+
+• Secure escrow payments
+• Transparent transactions
+• Reduced fraud
+• Interoperable service modules
+
+---
+
+🚀 Platform Modules
+
+AfriMarketRwa integrates multiple African service sectors into a single interoperable ecosystem.
+
+🏠 Rental & Property
+
+Users can:
+
+- List properties for rent
+- Pay deposits securely through escrow
+- Receive automatic settlement after rental completion
+
+Smart contracts ensure:
+
+- Funds are locked securely
+- Disputes can be resolved
+- Deposits are protected
+
+---
+
+✈️ Tourism
+
+Users can:
+
+- Book tours and attractions
+- Reserve accommodations
+- Combine tourism services with transport
+
+Tourism bookings can interact with transport services seamlessly.
+
+---
+
+🚆 Transport
+
+Transport services include:
+
+- Flights
+- Bus tickets
+- Ferry travel
+- Tour transport
+
+Users can book transport directly from tourism services or independently.
+
+---
+
+🏥 Health
+
+The platform allows:
+
+- Medical appointment scheduling
+- Consultation payments
+- Cross-border healthcare support
+
+Payments and records remain transparent and secure.
+
+---
+
+🌾 Agriculture
+
+Agriculture module enables:
+
+- Farmers to sell produce
+- Access farming tools and equipment
+- Purchase seeds and agricultural supplies
+
+This creates a direct marketplace between farmers and buyers.
+
+---
+
+🔐 Escrow Payment System
+
+The platform uses smart contract escrow payments.
+
+Transaction flow:
+
+1. Buyer initiates payment
+2. Funds are locked in escrow
+3. Service is delivered
+4. Escrow releases payment to provider
+
+If disputes occur:
+
+- Escrow funds remain locked
+- Settlement rules determine final distribution
+
+This system removes the need for trusted intermediaries.
+
+---
+
+🏗 Platform Architecture
+
+AfriMarketRwa Core Platform
+│
+├── Escrow Smart Contracts
+│
+├── Rental Module
+│
+├── Tourism Module
+│
+├── Transport Module
+│
+├── Health Module
+│
+└── Agriculture Module
+
+Each module interacts with the core escrow layer for secure payments.
+
+---
+
+⚙ Technology Stack
+
+Blockchain: Stellar
+Smart Contracts: Soroban
+Programming Language: Rust
+Payment Asset: USDC on Stellar
+Architecture: Modular smart contract system
+
+---
+
+🧪 Development Setup
+
+Clone the repository:
+
+git clone https://github.com/elissasimba-web/AfriMarketRwa_soroban.git
+cd AfriMarketRwa_soroban
+
+Build contracts:
+
+cargo build --all
+
+Run tests:
+
+cargo test
+
+---
+
+📊 Project Vision
+
+AfriMarketRwa aims to become core infrastructure for African digital services by enabling secure transactions across industries.
+
+The platform focuses on:
+
+- Trustless commerce
+- Cross-sector interoperability
+- Blockchain-powered financial security
+
+---
+
+🛣 Roadmap
+
+Phase 1
+
+Core escrow smart contract development
+
+Phase 2
+
+Rental marketplace integration
+
+Phase 3
+
+Tourism and transport services
+
+Phase 4
+
+Agriculture and health ecosystems
+
+Phase 5
+
+Decentralized governance and scaling
+
+---
+
+🤝 Contribution
+
+Contributions are welcome.
+
+Steps:
+
+1. Fork the repository
+2. Create a feature branch
+3. Implement improvements
+4. Submit a pull request
+
+---
+
+🌍 Long Term Vision
+
+AfriMarketRwa is designed to evolve into an open decentralized infrastructure for African marketplaces, enabling millions of users to transact securely without centralized intermediaries.
+
+---
+                 AfriMarketRwa Architecture Diagram
+                    ┌─────────────────────────────┐
+                    │      AfriMarketRwa Core     │
+                    │  Decentralized Marketplace  │
+                    └──────────────┬──────────────┘
+                                   │
+                        ┌──────────▼──────────┐
+                        │   Escrow Contract   │
+                        │  (USDC on Stellar)  │
+                        └──────────┬──────────┘
+                                   │
+     ┌──────────────┬──────────────┬──────────────┬──────────────┐
+     ▼              ▼              ▼              ▼              ▼
+┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐
+│ Rental   │  │ Tourism  │  │ Transport│  │ Health   │  │Agriculture│
+│ Module   │  │ Module   │  │ Module   │  │ Module   │  │ Module    │
+└──────────┘  └──────────┘  └──────────┘  └──────────┘  └──────────┘
+
+                Escrow Payment Flow
+        
+             User initiates payment
+                     │
+                     ▼
+             Funds locked in Escrow
+                     │
+                     ▼
+             Service Provider delivers service
+                     │
+                     ▼
+             Confirmation / settlement
+                     │
+                     ▼
+             Escrow releases funds   
+
+         AfriMarketRwa Ecosystem Diagram
+          
+
+               Users
+                  │
+                  ▼
+           AfriMarketRwa Platform
+                    │
+             ┌──────┼───────┐
+             ▼      ▼       ▼
+         Services Payments Governance
+             │       │        │
+            Rental  Escrow   DAO
+            Tourism USDC     Rules
+            Transport
+            Health
+            Agriculture
